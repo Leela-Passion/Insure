@@ -1,0 +1,518 @@
+import pandas as pd
+import numpy as np
+import random
+from faker import Faker
+from datetime import datetime, timedelta
+
+fake = Faker('en_IN')
+np.random.seed(42)
+random.seed(42)
+
+# ============================================================
+# CONFIGURATION
+# ============================================================
+NUM_CUSTOMERS = 55000
+NUM_POLICIES = 65000
+NUM_AGENTS = 800
+NUM_RIDERS = 35000
+NUM_MANAGERS = 60
+NUM_REGIONS = 24
+
+# ============================================================
+# MASTER DATA
+# ============================================================
+
+zones = ['East', 'West', 'South', 'North']
+
+states = {
+    'South': ['Andhra Pradesh', 'Telangana', 'Tamil Nadu', 'Karnataka', 'Kerala'],
+    'West': ['Maharashtra', 'Gujarat', 'Goa'],
+    'North': ['Delhi', 'Punjab', 'Haryana', 'Uttar Pradesh'],
+    'East': ['West Bengal', 'Odisha', 'Bihar', 'Jharkhand', 'Assam']
+}
+
+policy_types = ['ULIP', 'Endowment', 'Whole Life']
+
+policy_names = {
+    'ULIP': ['ULIP Growth Plan'],
+    'Endowment': ['Life Growth Advantage', 'Guaranteed Wealth Builder'],
+    'Whole Life': ['Whole Life Shield', 'Income Protection Plan']
+}
+
+rider_types = [
+    'Critical Illness',
+    'Accidental Death Benefit',
+    'Waiver of Premium',
+    'Hospital Cash'
+]
+
+occupations = [
+    ('Software Engineer', 10),
+    ('Pilot', 80),
+    ('Construction Worker', 70),
+    ('Doctor', 20),
+    ('Teacher', 15),
+    ('Driver', 60),
+    ('Police Officer', 75),
+    ('Sales Executive', 30),
+    ('Business Owner', 35)
+]
+
+# ============================================================
+# DIRTY HELPERS
+# ============================================================
+
+def introduce_null(value, probability=0.03):
+    return None if random.random() < probability else value
+
+
+def introduce_typo(value, probability=0.05):
+    if random.random() > probability:
+        return value
+
+    variations = {
+        'Active': ['ACTIVE', 'active', 'Actve'],
+        'Lapsed': ['LAPSED', 'lapse', 'Lapsee'],
+        'Male': ['M', 'male', 'MALE'],
+        'Female': ['F', 'female', 'FEMALE'],
+        'Andhra Pradesh': ['AP', 'A.P', 'andhrapradesh'],
+        'Tamil Nadu': ['TN', 'Tamilnadu'],
+        'Maharashtra': ['MH', 'Maharastra']
+    }
+
+    if value in variations:
+        return random.choice(variations[value])
+
+    return value
+
+
+def dirty_phone(phone):
+    options = [
+        phone,
+        '+91' + phone,
+        '91-' + phone,
+        '0' + phone,
+        phone[:5] + '-' + phone[5:],
+        phone + 'abc',
+        'INVALID'
+    ]
+
+    return random.choice(options)
+
+
+def dirty_amount(amount):
+    options = [
+        amount,
+        f'₹{amount}',
+        f'{amount} INR',
+        str(amount),
+        'forty thousand',
+        None
+    ]
+
+    return random.choice(options)
+
+
+def random_date(start_year=2018, end_year=2025):
+    start = datetime(start_year, 1, 1)
+    end = datetime(end_year, 12, 31)
+    delta = end - start
+    return start + timedelta(days=random.randint(0, delta.days))
+
+# ============================================================
+# REGION TABLE
+# ============================================================
+
+regions = []
+
+region_id = 1
+
+for zone in zones:
+    for state in states[zone]:
+        regions.append({
+            'region_id': region_id,
+            'region_name': state + ' Region',
+            'region_type': random.choice(['Urban', 'Rural']),
+            'state': introduce_typo(state, 0.1),
+            'zone': zone
+        })
+        region_id += 1
+
+regions_df = pd.DataFrame(regions)
+
+# ============================================================
+# REGIONAL MANAGERS
+# ============================================================
+
+managers = []
+
+for i in range(NUM_MANAGERS):
+    region = random.choice(regions)
+
+    managers.append({
+        'manager_id': f'RM{i+1:04d}',
+        'name': fake.name(),
+        'experience_years': random.randint(5, 25),
+        'region_id': region['region_id'],
+        'performance_score': round(random.uniform(2.5, 5.0), 2)
+    })
+
+managers_df = pd.DataFrame(managers)
+
+# ============================================================
+# AGENTS
+# ============================================================
+
+agents = []
+
+for i in range(NUM_AGENTS):
+    region = random.choice(regions)
+
+    zone = region['zone']
+
+    if zone == 'South':
+        conversion_rate = round(random.uniform(18, 40), 2)
+    elif zone == 'East':
+        conversion_rate = round(random.uniform(10, 22), 2)
+    elif zone == 'West':
+        conversion_rate = round(random.uniform(20, 45), 2)
+    else:
+        conversion_rate = round(random.uniform(2, 10), 2)
+
+    phone = str(random.randint(6000000000, 9999999999))
+
+    agents.append({
+        'agent_id': f'AG{i+1:05d}',
+        'name': fake.name(),
+        'experience_years': random.randint(1, 25),
+        'region_id': region['region_id'],
+        'performance_rating': random.randint(1, 5),
+        'joining_date': random_date(2015, 2024),
+        'languages_known': random.choice(['English', 'Hindi', 'Telugu', 'Tamil', 'Kannada']),
+        'product_conversion_rate': conversion_rate,
+        'avg_ticket_size': round(random.uniform(9000, 65000), 2),
+        'sales_cycle_efficiency_days': random.randint(5, 90),
+        'drop_off_rate_after_first_call': round(random.uniform(5, 55), 2),
+        'phone': dirty_phone(phone),
+        'zone': zone
+    })
+
+agents_df = pd.DataFrame(agents)
+
+# ============================================================
+# LEADS
+# ============================================================
+
+leads = []
+
+for i in range(NUM_CUSTOMERS):
+
+    region = random.choice(regions)
+    zone = region['zone']
+
+    gender = random.choice(['Male', 'Female'])
+
+    occupation, occ_risk = random.choice(occupations)
+
+    if zone == 'East':
+        funnel = np.random.choice(
+            ['Customer', 'Opportunity', 'SQL'],
+            p=[0.45, 0.35, 0.20]
+        )
+
+    elif zone == 'West':
+        funnel = np.random.choice(
+            ['Customer', 'Opportunity', 'Drop Off'],
+            p=[0.50, 0.30, 0.20]
+        )
+
+    elif zone == 'South':
+        funnel = np.random.choice(
+            ['Customer', 'SQL', 'Opportunity'],
+            p=[0.40, 0.30, 0.30]
+        )
+
+    else:
+        funnel = np.random.choice(
+            ['Drop Off', 'MQL', 'SQL'],
+            p=[0.50, 0.30, 0.20]
+        )
+
+    income = random.randint(250000, 2500000)
+
+    if income < 500000:
+        income_band = 'Low'
+    elif income < 1200000:
+        income_band = 'Medium'
+    else:
+        income_band = 'High'
+
+    customer_name = fake.name()
+
+    if random.random() < 0.03:
+        customer_name = customer_name.lower()
+
+    phone = str(random.randint(6000000000, 9999999999))
+
+    leads.append({
+        'customer_id': f'CUST{i+1:06d}',
+        'name': introduce_null(customer_name, 0.02),
+        'phone_number': dirty_phone(phone),
+        'is_phone_number_valid': random.choice(['Yes', 'No']),
+        'age_at_entry': random.randint(18, 70),
+        'current_age': random.randint(18, 80),
+        'gender': introduce_typo(gender, 0.1),
+        'income': dirty_amount(income),
+        'number_of_visits_rate': random.randint(1, 50),
+        'region_id': region['region_id'],
+        'income_band': income_band,
+        'occupation': occupation,
+        'occupation_risk_score': occ_risk,
+        'marital_status': random.choice(['Single', 'Married', 'Divorcee']),
+        'preferred_language': random.choice(['English', 'Hindi', 'Telugu']),
+        'funnel_stage': funnel,
+        'drop_off_reason': random.choice(['KYC', 'Budget Issues', 'Competitor', None]),
+        'competitor': random.choice(['LIC', 'Max Life', 'SBI', None]),
+        'interested_product': random.choice(policy_types),
+        'budget': random.randint(10000, 100000),
+        'authority': random.choice(['Spouse', 'Parents', 'Kids', 'Company Approval']),
+        'need': random.choice([
+            'Dependents life cover',
+            'Critical Illness',
+            'Frequent travel',
+            'High risk occupation'
+        ]),
+        'timeline': random.choice(['1 Month', '3 Months', '6 Months']),
+        'first_time_response_failure': random.choice(['Yes', 'No']),
+        'prospect_needs_addressed': random.choice(['Yes', 'No']),
+        'prospect_needs': random.choice(['Illustration', 'Top up', 'Riders']),
+        'time_spent_on_pricing_page': random.randint(10, 900),
+        'form_completed': random.choice(['Yes', 'No']),
+        'zone': zone
+    })
+
+leads_df = pd.DataFrame(leads)
+
+# ============================================================
+# MEDICAL RISK TABLE
+# ============================================================
+
+medical = []
+
+conditions = {
+    'Diabetes': {'score': 30, 'wait': 3, 'med': 30},
+    'BP': {'score': 45, 'wait': 1, 'med': 45},
+    'Cancer': {'score': 75, 'wait': 6, 'med': 75}
+}
+
+for i in range(NUM_CUSTOMERS):
+
+    customer = leads[i]
+
+    condition = random.choice(list(conditions.keys()))
+
+    cond = conditions[condition]
+
+    bmi = round(random.uniform(18, 38), 2)
+
+    risk_score = (
+        bmi +
+        cond['score'] +
+        random.randint(10, 40)
+    )
+
+    if risk_score < 60:
+        risk_category = 'Low'
+        base_premium = 20000
+    elif risk_score < 100:
+        risk_category = 'Medium'
+        base_premium = 45000
+    else:
+        risk_category = 'High'
+        base_premium = 65000
+
+    medical.append({
+        'underwriting_id': f'UW{i+1:06d}',
+        'customer_id': customer['customer_id'],
+        'bmi_value': bmi,
+        'age_at_entry': customer['age_at_entry'],
+        'blood_pressure_category': random.choice(['Low', 'Medium', 'High']),
+        'smoking_flag': random.choice(['Y', 'N']),
+        'alcohol_flag': random.choice(['Y', 'N']),
+        'sugar_risk_category': random.choice(['Low', 'Medium', 'High']),
+        'cholesterol_risk_category': random.choice(['Low', 'Medium', 'High']),
+        'ecg_risk_category': random.choice(['Low', 'Medium', 'High']),
+        'urine_test_risk_category': random.choice(['Low', 'Medium', 'High']),
+        'liver_test_risk_category': random.choice(['Low', 'Medium', 'High']),
+        'kidney_test_risk_category': random.choice(['Low', 'Medium', 'High']),
+        'preexisting_condition_identified': 'Y',
+        'preexisting_condition_type': condition,
+        'waiting_period_months': cond['wait'],
+        'long_term_medication': cond['med'],
+        'prescription_frequency_monthly': random.randint(1, 6),
+        'medical_condition_score': cond['score'],
+        'aggregated_medical_risk_score': risk_score,
+        'risk_score_category': risk_category,
+        'base_premium': dirty_amount(base_premium)
+    })
+
+medical_df = pd.DataFrame(medical)
+
+# ============================================================
+# FACT POLICY
+# ============================================================
+
+policies = []
+
+for i in range(NUM_POLICIES):
+
+    customer = random.choice(leads)
+    med = medical_df[medical_df['customer_id'] == customer['customer_id']].iloc[0]
+
+    region = regions_df[regions_df['region_id'] == customer['region_id']].iloc[0]
+
+    policy_type = customer['interested_product']
+
+    if policy_type == 'Endowment':
+        sum_assured = 100000
+    elif policy_type == 'Whole Life':
+        sum_assured = 132000
+    else:
+        sum_assured = 100000
+
+    start_date = random_date(2019, 2025)
+
+    policy_term = random.randint(10, 30)
+    premium_term = policy_term - 5
+
+    if random.random() < 0.03:
+        premium_term = policy_term + 2
+
+    end_date = start_date + timedelta(days=policy_term*365)
+
+    if random.random() < 0.02:
+        end_date = start_date - timedelta(days=200)
+
+    status = random.choice([
+        'Active',
+        'Lapsed',
+        'Claimed',
+        'Paidup',
+        'Matured'
+    ])
+
+    if region['zone'] == 'West':
+        premium = random.randint(8000, 15000)
+    elif region['zone'] == 'East':
+        premium = random.randint(40000, 70000)
+    elif region['zone'] == 'South':
+        premium = random.randint(25000, 45000)
+    else:
+        premium = random.randint(10000, 20000)
+
+    total_paid = premium * random.randint(1, premium_term)
+
+    surrender_amount = None
+
+    if random.random() < 0.25:
+        surrender_amount = total_paid * 0.7
+
+    claim_reason = None
+
+    if status == 'Claimed':
+        claim_reason = random.choice(['death', 'urgent money need'])
+
+    if random.random() < 0.03:
+        claim_reason = None
+
+    policies.append({
+        'policy_id': f'POL{i+1:07d}',
+        'policy_type_code': policy_type[:3].upper(),
+        'customer_id': customer['customer_id'],
+        'region_id': customer['region_id'],
+        'sum_assured': dirty_amount(sum_assured),
+        'premium_amount': dirty_amount(premium),
+        'policy_start_date': start_date,
+        'date_of_purchase': start_date - timedelta(days=random.randint(0, 60)),
+        'purchase_quarter': f'Q{random.randint(1,4)}',
+        'purchase_year': start_date.year,
+        'purchase_month': start_date.month,
+        'policy_end_date': end_date,
+        'date_of_maturity': end_date,
+        'status': introduce_typo(status, 0.08),
+        'last_paid_date': start_date + timedelta(days=random.randint(30,1000)),
+        'premium_payment_term': premium_term,
+        'policy_term': policy_term,
+        'loan_eligible': random.choice(['Yes', 'No']),
+        'lock_in_period': 5,
+        'claim_reason': claim_reason,
+        'underwriting_expenses': random.choice(['High', 'Medium', 'Low']),
+        'surrender_amount': surrender_amount,
+        'past_agent': random.choice(['Yes', 'No']),
+        'current_agent_id': random.choice(agents)['agent_id'],
+        'due_date': start_date + timedelta(days=30),
+        'total_premium_paid': total_paid,
+        'payment_gap': random.choice([None, random.randint(1000, 15000)]),
+        'amount_withdrawn': random.choice([0, random.randint(1000, 30000)]),
+        'maturity_amount': sum_assured + (1500 * policy_term),
+        'total_premium_payable': premium * premium_term,
+        'zone': region['zone']
+    })
+
+policies_df = pd.DataFrame(policies)
+
+# ============================================================
+# DUPLICATE RECORDS
+# ============================================================
+
+sample_dups = policies_df.sample(1200)
+policies_df = pd.concat([policies_df, sample_dups], ignore_index=True)
+
+# ============================================================
+# RIDERS
+# ============================================================
+
+riders = []
+
+for i in range(NUM_RIDERS):
+
+    policy = random.choice(policies)
+
+    rider = random.choice(rider_types)
+
+    riders.append({
+        'rider_id': f'RID{i+1:06d}',
+        'policy_id': policy['policy_id'],
+        'rider_type_id': rider[:3].upper(),
+        'rider_premium': dirty_amount(random.randint(500, 15000)),
+        'rider_status': random.choice(['Active', 'Claimed', 'Closed']),
+        'start_date': random_date(2019, 2025)
+    })
+
+riders_df = pd.DataFrame(riders)
+
+# ============================================================
+# SAVE CSV FILES
+# ============================================================
+
+regions_df.to_csv('dim_region.csv', index=False)
+managers_df.to_csv('dim_regional_manager.csv', index=False)
+agents_df.to_csv('dim_agent.csv', index=False)
+leads_df.to_csv('dim_lead.csv', index=False)
+medical_df.to_csv('medical_risk_table.csv', index=False)
+policies_df.to_csv('fact_policy.csv', index=False)
+riders_df.to_csv('fact_rider.csv', index=False)
+
+print('=============================================')
+print('DIRTY ENTERPRISE INSURANCE DATA GENERATED')
+print('=============================================')
+print(f'Regions: {len(regions_df)}')
+print(f'Managers: {len(managers_df)}')
+print(f'Agents: {len(agents_df)}')
+print(f'Leads: {len(leads_df)}')
+print(f'Medical Records: {len(medical_df)}')
+print(f'Policies: {len(policies_df)}')
+print(f'Riders: {len(riders_df)}')
+print('=============================================')
+print('CSV FILES CREATED SUCCESSFULLY')
+print('=============================================')
