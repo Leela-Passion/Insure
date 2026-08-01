@@ -16,7 +16,9 @@ This platform addresses these challenges by architecting a governed analytics ec
 
 The solution implements an enterprise-style analytics architecture:
 
-![Platform Architecture](images/enterprise-insurance-platform.png)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/USERNAME/insure/main/images/enterprise-insurance-platform.png" width="1200">
+</p>
 
 ## Architecture Philosophy
 
