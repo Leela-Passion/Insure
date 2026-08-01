@@ -508,9 +508,3 @@ Enterprise Intelligence:
 * automated decision systems
 
 ---
-
-## Product Vision
-
-
-
-because that will demonstrate your **Analytics Engineer + Data Architect capability**.
