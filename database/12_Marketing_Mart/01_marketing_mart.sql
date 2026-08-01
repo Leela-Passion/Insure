@@ -1,0 +1,2 @@
+CREATE MATERIALIZED VIEW mart_marketing.lead_funnel AS SELECT campaign,campaign_type,lead_stage,lead_status,COUNT(*) lead_count,AVG(engagement_score) avg_engagement,AVG(page_visits) avg_page_visits,COUNT(*) FILTER(WHERE proposal_form_completed) proposal_completed,COUNT(*) FILTER(WHERE lead_status='Converted') converted FROM core.lead GROUP BY 1,2,3,4 WITH NO DATA;
+CREATE UNIQUE INDEX IF NOT EXISTS ux_marketing_lead_funnel ON mart_marketing.lead_funnel(campaign,campaign_type,lead_stage,lead_status);

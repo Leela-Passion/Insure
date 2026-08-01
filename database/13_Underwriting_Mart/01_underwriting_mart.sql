@@ -1,0 +1,2 @@
+CREATE MATERIALIZED VIEW mart_underwriting.risk_portfolio AS SELECT p.region_id,u.risk_score_category,COUNT(*) customer_count,AVG(u.medical_risk_score) avg_medical_risk,AVG(u.base_premium) avg_base_premium,AVG(p.premium_amount) avg_policy_premium FROM core.underwriting u LEFT JOIN core.policy p USING(customer_id) GROUP BY 1,2 WITH NO DATA;
+CREATE UNIQUE INDEX IF NOT EXISTS ux_underwriting_risk_portfolio ON mart_underwriting.risk_portfolio(region_id,risk_score_category);

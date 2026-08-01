@@ -1,0 +1,6 @@
+.env
+*.log
+*.dump
+*.bak
+.idea/
+.vscode/

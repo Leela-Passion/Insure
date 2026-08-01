@@ -1,0 +1,2 @@
+CREATE MATERIALIZED VIEW mart_finance.policy_finance AS SELECT region_id,date_trunc('month',purchase_date)::date purchase_month,COUNT(*) policy_count,SUM(premium_amount) written_premium,SUM(total_premium_paid) premium_paid,SUM(total_premium_payable) premium_payable,SUM(COALESCE(payment_gap_months,0)) payment_gap_months FROM core.policy GROUP BY 1,2 WITH NO DATA;
+CREATE UNIQUE INDEX IF NOT EXISTS ux_finance_policy_finance ON mart_finance.policy_finance(region_id,purchase_month);

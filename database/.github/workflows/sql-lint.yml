@@ -1,0 +1,11 @@
+name: SQL static checks
+on: [push, pull_request]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify deploy references
+        run: |
+          grep '^\\ir ' deploy.sql | sed 's/^\\ir //' | xargs -I{} test -f "{}"
+          test -f refresh_all.sql

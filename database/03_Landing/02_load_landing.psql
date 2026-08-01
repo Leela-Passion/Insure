@@ -1,0 +1,16 @@
+\if :{?data_dir}
+\else
+\error 'Set data_dir, for example: psql -v data_dir="C:/data/files" -f 02_load_landing.psql'
+\endif
+\cd :data_dir
+TRUNCATE landing.dim_customer,landing.dim_agent,landing.dim_region,landing.dim_regional_manager,landing.dim_policy_protection,landing.dim_rider,landing.fact_policy,landing.fact_rider,landing.fact_underwriting,landing.fact_lead_funnel;
+\copy landing.dim_customer(customer_id,customer_name,phone_number,gender,marital_status,income,income_band,occupation,occupation_risk,age_at_entry,preferred_language,region_id) FROM 'DIM_CUSTOMER.csv' CSV HEADER;
+\copy landing.dim_agent(agent_id,name,experience_years,joining_date,region_id,performance_rating,languages_known,specialisation,product_wise_conversion_rate,median_ticket_size,sales_cycle_efficiency,drop_off_rate_after_first_call,upsell_conversion_percentage,sla_adherence) FROM 'DIM_AGENT.csv' CSV HEADER;
+\copy landing.dim_region(region_id,region_name,state,zone,region_type,region_dir) FROM 'DIM_REGION.csv' CSV HEADER;
+\copy landing.dim_regional_manager(manager_id,name,experience_years,performance_score,region_id) FROM 'DIM_REGIONAL_MANAGER.csv' CSV HEADER;
+\copy landing.dim_policy_protection(policy_type_code,policy_name,policy_type,coverage_details,grace_period) FROM 'DIM_POLICY_PROTECTION.csv' CSV HEADER;
+\copy landing.dim_rider(rider_type_id,rider_name,description,risk_level) FROM 'DIM_RIDER.csv' CSV HEADER;
+\copy landing.fact_policy(policy_id,customer_id,policy_type_code,region_id,current_agent_id,nominee_name,sum_assured,premium_amount,policy_start_date,date_of_purchase,purchase_quarter,purchase_year,purchase_month,policy_end_date,date_of_maturity,status,last_paid_date,premium_payment_term,policy_term,loan_eligible,lock_in_period_months,claim_reason,underwriting_expenses,surrender_amount,total_premium_paid,payment_gap_months,amount_withdrawn,maturity_amount,total_premium_payable,fraud_risk_flag) FROM 'FACT_POLICY.csv' CSV HEADER;
+\copy landing.fact_rider(rider_record_id,policy_id,customer_id,rider_type_id,rider_premium,rider_sum_assured,rider_start_date,rider_end_date,rider_status) FROM 'FACT_RIDER.csv' CSV HEADER;
+\copy landing.fact_underwriting(underwriting_id,customer_id,bmi_value,age_at_entry,blood_pressure_category,smoking_flag,alcohol_flag,sugar_risk_category,cholesterol_risk_category,ecg_risk_category,urine_test_risk_category,liver_test_risk_category,kidney_test_risk_category,preexisting_condition_identified,preexisting_condition_type,waiting_period_months,long_term_medication,prescription_frequency_monthly,medical_condition_score,aggregated_medical_risk_score,risk_score_category,base_premium) FROM 'FACT_UNDERWRITING.csv' CSV HEADER;
+\copy landing.fact_lead_funnel(lead_id,customer_id,campaign,campaign_type,utm_link,time_spent_on_pricing_page,scroll_depth,page_visits_count,engagement_score,downloaded_brochure,used_maturity_calculator,compared_plans,lead_stage,lead_status,lead_status_date,rejection_reason,rejection_reason_code,first_time_response_failure,follow_up_required,follow_up_date,follow_up_pitch,proposal_form_completed,competitor,authority,budget,need,timeline,prospect_needs,prospect_needs_addressed,referral_name) FROM 'FACT_LEAD_FUNNEL.csv' CSV HEADER;
