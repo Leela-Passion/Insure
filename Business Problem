@@ -1,0 +1,131 @@
+# Business Problem
+
+## Moving Insurance Analytics from Reporting to Decision Intelligence
+
+Insurance organizations generate significant volumes of customer, policy, agent, underwriting, and transaction data. However, business growth depends not only on data availability but on the ability to trust, interpret, and operationalize that data effectively.
+
+Despite having large datasets, insurance businesses often face challenges in answering critical strategic questions:
+
+- Are we growing revenue sustainably or only increasing policy volume?
+- Which regions are creating long-term customer value?
+- Are sales teams optimizing for quality business or short-term conversions?
+- Are underwriting decisions aligned with future risk exposure?
+- Can leadership trust the reports used for business decisions?
+
+
+## Key Business Challenges
+
+### 1. Fragmented Data Landscape
+
+Insurance data is generated across multiple operational areas:
+
+- Customers
+- Policies
+- Agents
+- Regional teams
+- Riders
+- Underwriting processes
+- Lead generation channels
+
+Without a structured analytical architecture, these datasets remain isolated, making it difficult to create a unified view of business performance.
+
+
+### 2. Data Trust and Quality Issues
+
+Business decisions are only as reliable as the underlying data.
+
+Common challenges include:
+
+- Inconsistent customer attributes
+- Duplicate records
+- Missing critical information
+- Non-standardized business values
+- Reporting inconsistencies across teams
+
+Poor data quality impacts customer analytics, sales measurement, financial reporting, and risk assessment.
+
+
+### 3. Growth Quality Visibility Gap
+
+Traditional insurance reporting often focuses on volume metrics:
+
+- Number of policies sold
+- Number of leads generated
+- Conversion percentages
+
+However, sustainable growth requires deeper intelligence:
+
+- Premium quality
+- Customer retention behaviour
+- Regional profitability
+- Agent effectiveness
+- Risk-adjusted growth
+
+
+### 4. Customer Trust and Experience Challenges
+
+Insurance is a trust-driven industry.
+
+Lead drop-offs and customer dissatisfaction can occur due to:
+
+- Communication gaps
+- Poor advisory experience
+- Lack of personalized engagement
+- Complex decision journeys
+
+Organizations need visibility into where trust failures occur throughout the customer lifecycle.
+
+
+### 5. Sales Performance and Incentive Risks
+
+High sales volume does not always indicate healthy business performance.
+
+Organizations need to understand:
+
+- Which agents create sustainable value
+- Whether sales incentives encourage quality policies
+- Whether business concentration creates operational dependency
+
+
+### 6. Risk and Underwriting Intelligence Limitations
+
+Insurance pricing and profitability depend on accurate risk understanding.
+
+Organizations require analytical capabilities to identify:
+
+- Emerging risk patterns
+- Potential pricing gaps
+- Future liability exposure
+- Risk concentration areas
+
+
+# Business Objective
+
+The objective was to design an enterprise analytics platform that transforms raw insurance data into:
+
+**Trusted Data → Business Intelligence → Strategic Decisions**
+
+
+The platform enables stakeholders to:
+
+| Stakeholder | Business Need |
+|-------------|---------------|
+| Executives | Understand growth quality, profitability, and strategic risks |
+| Finance Teams | Analyze revenue performance and premium quality |
+| Sales Leaders | Improve agent productivity and conversion effectiveness |
+| Marketing Teams | Optimize lead journeys and campaign effectiveness |
+| Underwriting Teams | Improve risk visibility and pricing intelligence |
+| Data Teams | Establish trusted, governed analytical data assets |
+
+
+# Expected Business Impact
+
+By creating a governed analytics ecosystem, the organization gains:
+
+- Higher confidence in business reporting
+- Faster decision-making
+- Improved revenue quality analysis
+- Better customer understanding
+- Stronger sales effectiveness measurement
+- Improved risk intelligence
+- Scalable analytics foundation
