@@ -1,0 +1,31 @@
+table_name,column_name,sensitivity_level,business_owner,masking_required,retention_period,regulatory_reference
+DIM_CUSTOMER,customer_id,Internal,Data Engineering,N,7 years,IRDAI Circular 2023
+DIM_CUSTOMER,customer_name,PII,CRM Analytics,Y,7 years,IT Act 2000; DPDP 2023
+DIM_CUSTOMER,phone_number,PII,CRM Analytics,Y,7 years,DPDP 2023
+DIM_CUSTOMER,income,Confidential,Actuarial,Y,7 years,IRDAI Reg 2016
+DIM_CUSTOMER,age_at_entry,PHI,Underwriting,Y,10 years,IRDAI Reg 2016
+DIM_CUSTOMER,occupation,Confidential,Underwriting,N,7 years,IRDAI Reg 2016
+DIM_CUSTOMER,gender,Internal,CRM Analytics,N,7 years,DPDP 2023
+DIM_CUSTOMER,preferred_language,Public,Marketing,N,3 years,Internal Policy
+FACT_UNDERWRITING,bmi_value,PHI,Actuarial,Y,15 years,IRDAI Health Reg
+FACT_UNDERWRITING,smoking_flag,PHI,Actuarial,Y,15 years,IRDAI Health Reg
+FACT_UNDERWRITING,preexisting_condition_type,PHI,Actuarial,Y,15 years,IRDAI Health Reg
+FACT_UNDERWRITING,aggregated_medical_risk_score,Confidential,Actuarial,Y,15 years,IRDAI Reg 2016
+FACT_UNDERWRITING,base_premium,Confidential,Finance,N,10 years,IRDAI Reg 2016
+FACT_POLICY,policy_id,Internal,Policy Admin,N,10 years,IRDAI Reg 2016
+FACT_POLICY,sum_assured,Confidential,Finance,N,10 years,IRDAI Reg 2016
+FACT_POLICY,premium_amount,Confidential,Finance,N,10 years,IRDAI Reg 2016
+FACT_POLICY,nominee_name,PII,Policy Admin,Y,10 years,DPDP 2023
+FACT_POLICY,fraud_risk_flag,Confidential,Fraud Analytics,Y,10 years,IRDAI Fraud Guidelines
+FACT_POLICY,total_premium_paid,Internal,Finance,N,10 years,IRDAI Reg 2016
+FACT_POLICY,surrender_amount,Confidential,Finance,N,10 years,IRDAI Reg 2016
+FACT_LEAD_FUNNEL,lead_id,Internal,CRM Analytics,N,5 years,Internal Policy
+FACT_LEAD_FUNNEL,campaign,Public,Marketing,N,3 years,Internal Policy
+FACT_LEAD_FUNNEL,engagement_score,Internal,CRM Analytics,N,5 years,Internal Policy
+FACT_LEAD_FUNNEL,fraud_risk_flag,Confidential,Fraud Analytics,Y,7 years,IRDAI Fraud Guidelines
+FACT_LEAD_FUNNEL,competitor,Confidential,Strategy,Y,5 years,Internal Policy
+DIM_AGENT,sla_adherence,Internal,Operations,N,5 years,Internal SLA Policy
+DIM_AGENT,product_wise_conversion_rate,Confidential,Sales Analytics,N,5 years,Internal Policy
+DIM_REGIONAL_MANAGER,performance_score,Confidential,HR,Y,5 years,Internal HR Policy
+FACT_RIDER,rider_premium,Internal,Finance,N,10 years,IRDAI Reg 2016
+DIM_POLICY_PROTECTION,coverage_details,Public,Product,N,Indefinite,IRDAI Product Filing

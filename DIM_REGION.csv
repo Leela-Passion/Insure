@@ -1,0 +1,51 @@
+region_id,region_name,state,zone,region_type,region_dir
+RGN001,Agra Urban,Uttar Pradesh,Zone-A,Urban,North
+RGN002,Lucknow Rural,Uttar Pradesh,Zone-A,Rural,North
+RGN003,New Delhi Urban,Delhi,Zone-A,Urban,North
+RGN004,Rohini Rural,Delhi,Zone-A,Rural,North
+RGN005,Faridabad Urban,Haryana,Zone-A,Urban,North
+RGN006,Gurugram Rural,Haryana,Zone-A,Rural,North
+RGN007,Ludhiana Urban,Punjab,Zone-A,Urban,North
+RGN008,Ludhiana Rural,Punjab,Zone-A,Rural,North
+RGN009,Himachal City Urban,Himachal Pradesh,Zone-A,Urban,North
+RGN010,Himachal City Rural,Himachal Pradesh,Zone-A,Rural,North
+RGN011,Uttarakhand City Urban,Uttarakhand,Zone-A,Urban,North
+RGN012,Uttarakhand City Rural,Uttarakhand,Zone-A,Rural,North
+RGN013,Jaipur Urban,Rajasthan,Zone-A,Urban,North
+RGN014,Jaipur Rural,Rajasthan,Zone-A,Rural,North
+RGN015,Jammu City Urban,Jammu & Kashmir,Zone-A,Urban,North
+RGN016,Jammu City Rural,Jammu & Kashmir,Zone-A,Rural,North
+RGN017,Nizamabad Urban,Telangana,Zone-B,Urban,South
+RGN018,Nizamabad Rural,Telangana,Zone-B,Rural,South
+RGN019,Visakhapatnam Urban,Andhra Pradesh,Zone-B,Urban,South
+RGN020,Guntur Rural,Andhra Pradesh,Zone-B,Rural,South
+RGN021,Bengaluru Urban,Karnataka,Zone-B,Urban,South
+RGN022,Mangaluru Rural,Karnataka,Zone-B,Rural,South
+RGN023,Madurai Urban,Tamil Nadu,Zone-B,Urban,South
+RGN024,Madurai Rural,Tamil Nadu,Zone-B,Rural,South
+RGN025,Kozhikode Urban,Kerala,Zone-B,Urban,South
+RGN026,Thiruvananthapuram Rural,Kerala,Zone-B,Rural,South
+RGN027,Puducherry City Urban,Puducherry,Zone-B,Urban,South
+RGN028,Puducherry City Rural,Puducherry,Zone-B,Rural,South
+RGN029,Durgapur Urban,West Bengal,Zone-C,Urban,East
+RGN030,Siliguri Rural,West Bengal,Zone-C,Rural,East
+RGN031,Bhubaneswar Urban,Odisha,Zone-C,Urban,East
+RGN032,Bhubaneswar Rural,Odisha,Zone-C,Rural,East
+RGN033,Muzaffarpur Urban,Bihar,Zone-C,Urban,East
+RGN034,Gaya Rural,Bihar,Zone-C,Rural,East
+RGN035,Jharkhand City Urban,Jharkhand,Zone-C,Urban,East
+RGN036,Jharkhand City Rural,Jharkhand,Zone-C,Rural,East
+RGN037,Assam City Urban,Assam,Zone-C,Urban,East
+RGN038,Assam City Rural,Assam,Zone-C,Rural,East
+RGN039,Tripura City Urban,Tripura,Zone-C,Urban,East
+RGN040,Tripura City Rural,Tripura,Zone-C,Rural,East
+RGN041,Meghalaya City Urban,Meghalaya,Zone-C,Urban,East
+RGN042,Meghalaya City Rural,Meghalaya,Zone-C,Rural,East
+RGN043,Mumbai Urban,Maharashtra,Zone-D,Urban,West
+RGN044,Pune Rural,Maharashtra,Zone-D,Rural,West
+RGN045,Surat Urban,Gujarat,Zone-D,Urban,West
+RGN046,Vadodara Rural,Gujarat,Zone-D,Rural,West
+RGN047,Goa City Urban,Goa,Zone-D,Urban,West
+RGN048,Goa City Rural,Goa,Zone-D,Rural,West
+RGN049,Jabalpur Urban,Madhya Pradesh,Zone-D,Urban,West
+RGN050,Indore Rural,Madhya Pradesh,Zone-D,Rural,West

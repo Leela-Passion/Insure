@@ -1,0 +1,11 @@
+policy_type_code,policy_name,policy_type,coverage_details,grace_period
+PP01,LIC-Shield Endowment Classic,Endowment,SA+Bonus on maturity; death benefit 10x premium,12
+PP02,LIC-Shield Endowment Plus,Endowment,SA+guaranteed additions; accidental rider optional,12
+PP03,WealthBuilder ULIP Growth,ULIP,Market-linked; 4 fund options; partial withdrawal after 5y,60
+PP04,WealthBuilder ULIP Balanced,ULIP,Balanced fund; capital protection floor; annual rebalancing,60
+PP05,WealthBuilder ULIP Debt,ULIP,Debt fund; stable returns; lower risk profile,60
+PP06,WholeLife Secure 100,Whole Life,Coverage to age 100; paid-up option at 60,12
+PP07,WholeLife Protect Family,Whole Life,Whole life + family income rider; non-forfeiture clause,12
+PP08,Jeevan Labh Endowment,Endowment,Limited premium pay; bonus + loyalty additions,12
+PP09,Future Invest ULIP,ULIP,5 fund options; SWITCH facility; online only plan,60
+PP10,Shielded Whole Life Rural,Whole Life,Rural-specific; lower SA; weekly/monthly premium modes,3

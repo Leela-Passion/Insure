@@ -1,0 +1,6 @@
+rider_type_id,rider_name,description,risk_level
+R01,Critical Illness Rider,Lump sum on diagnosis of 30 critical illnesses,High
+R02,Accidental Death Benefit Rider,Additional SA on accidental death,Medium
+R03,Disability Income Rider,Monthly income on permanent disability,Medium
+R04,Hospital Cash Rider,Daily cash during hospitalisation,Low
+R05,Family Income Benefit Rider,Monthly income to family post death for 10 years,Medium

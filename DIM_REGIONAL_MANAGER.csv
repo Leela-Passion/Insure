@@ -1,0 +1,16 @@
+manager_id,name,experience_years,performance_score,region_id
+MGR001,Geeta Iyer,4,3.64,RGN035
+MGR002,Siddharth Chaudhary,14,3.76,RGN008
+MGR003,Gaurav Kulkarni,7,3.36,RGN025
+MGR004,Swati More,10,3.9,RGN006
+MGR005,Deepa Hegde,4,2.91,RGN036
+MGR006,Priya Saxena,25,4.49,RGN019
+MGR007,Siddharth Naik,10,4.19,RGN041
+MGR008,Ramesh Patel,9,3.81,RGN040
+MGR009,Yash Kumar,9,3.95,RGN024
+MGR010,Gaurav Shetty,14,2.4,RGN037
+MGR011,Sneha Balaji,24,4.49,RGN013
+MGR012,Sneha Krishnan,14,4.36,RGN005
+MGR013,Isha Naik,6,2.4,RGN003
+MGR014,Sapna Pillai,19,4.09,RGN015
+MGR015,Harsha Singh,20,4.3,RGN045
