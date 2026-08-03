@@ -7,7 +7,7 @@ An end-to-end enterprise analytics platform built to demonstrate how modern orga
 This project combines Analytics Engineering, Data Governance, Data Modeling, SQL Development, Business Intelligence, and Executive KPI Design to create a scalable analytics ecosystem that supports strategic decision-making while protecting sensitive customer information.
 
 <p align="center">
-  <img src="Insure/main/assets/Platform Architecture" width="1000">
+  <img src="assets/Platform%20Architecture.png" width="1000" alt="Platform Architecture">
 </p>
 
 ### Key Highlights
