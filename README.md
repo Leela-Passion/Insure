@@ -1,122 +1,140 @@
-# Enterprise Insurance Intelligence Platform
+# Enterprise Insurance Intelligence Platform (Version 2.0)
 
-## Transforming Insurance Data into Trusted Business Intelligence, Risk Insights, and Growth Decisions
+## Privacy-Preserving Analytics, Data Governance & Executive Intelligence
 
-An end-to-end analytics engineering platform designed to help insurance organizations move from fragmented operational data to governed, trusted, and decision-ready intelligence across revenue, customer experience, sales performance, underwriting risk, and business operations.
+An end-to-end enterprise analytics platform built to demonstrate how modern organizations can transform operational insurance data into governed, secure, and decision-ready business intelligence.
 
-
-## Business Context
-
-Insurance companies operate on large volumes of customer, policy, agent, medical, and transaction data. However, growth decisions are often impacted by inconsistent data definitions, poor data quality, fragmented reporting, and limited visibility into customer behaviour and operational risks.
-
-This platform addresses these challenges by architecting a governed analytics ecosystem that transforms raw insurance data into trusted business intelligence for executives, analysts, and operational teams.
-
-
-## Platform Overview
-
-The solution implements an enterprise-style analytics architecture:
+This project combines Analytics Engineering, Data Governance, Data Modeling, SQL Development, Business Intelligence, and Executive KPI Design to create a scalable analytics ecosystem that supports strategic decision-making while protecting sensitive customer information.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Leela-Passion/insure/main/images/Platform Architecture" width="1200">
+  <img src="Insure/main/assets/Platform Architecture" width="1000">
 </p>
 
-## Architecture Philosophy
+### Key Highlights
 
-The platform follows modern analytics engineering principles:
+* Designed a layered enterprise analytics architecture in PostgreSQL
+* Built reusable analytics engineering pipelines using SQL and PL/pgSQL
+* Implemented enterprise-grade customer tokenization and pseudonymization
+* Created a secure analytics layer with controlled exposure of business data
+* Developed cross-table reconciliation and data quality monitoring across 10 source domains
+* Designed governed semantic business views and KPI frameworks
+* Built story-driven Finance, Sales, Marketing, Underwriting, and Executive data marts
+* Created Power BI-ready analytical models focused on executive decision intelligence
 
-- Separation of raw, trusted, and consumption layers
-- Standardized enterprise data definitions
-- Snowflake dimensional modeling
-- Data quality monitoring before analytics consumption
-- Governance-first approach for sensitive insurance information
-- Business-focused data marts aligned with organizational decisions
+### Data Governance & Privacy Engineering
 
+A major enhancement in Version 2.0 introduces privacy-preserving analytics capabilities.
 
-## Business Capabilities Enabled
+Implemented:
 
-The platform enables insurance leaders to answer critical business questions:
+* Reversible customer tokenization framework
+* Secure token vault architecture
+* HMAC-based pseudonymization of identity attributes
+* Secure business consumption views
+* Controlled analytical access patterns
+* Cross-domain reconciliation and lineage validation
 
-### Revenue Intelligence
-- Which regions generate sustainable premium growth?
-- Is policy growth translating into revenue quality?
-- Where are profitability risks emerging?
+This approach enables business intelligence consumption without exposing direct customer PII.
 
+### Analytics Engineering Capabilities
 
-### Customer Intelligence
-- How can customer relationships be strengthened?
-- Which customer segments require targeted engagement?
-- Where are trust barriers impacting conversions?
+Designed and implemented:
 
+* Layered data architecture
+* Core transformation framework
+* Standardization functions
+* Reusable analytical views
+* Business semantic layer
+* Data quality validation framework
+* Reconciliation engine
+* Story-aligned analytical marts
 
-### Sales Effectiveness
-- Which agents drive sustainable growth?
-- Are sales incentives encouraging quality business?
-- Where do productivity gaps exist?
+The platform demonstrates how analytics engineering principles can be used to create scalable, maintainable, and governed data products.
 
+### Business Intelligence & Executive Analytics
 
-### Risk Intelligence
-- Are underwriting decisions aligned with future liability?
-- How can medical risk signals improve pricing decisions?
+Developed business-focused intelligence assets including:
 
+#### Finance Intelligence
 
-### Data Trust & Governance
+* Premium Quality Analysis
+* Collection Performance Monitoring
+* Payment Gap Analysis
+* Lapse Risk Indicators
 
-The platform establishes confidence in analytics through:
+#### Sales Intelligence
 
-- Data profiling
-- Quality scoring
-- Standardization frameworks
-- Validation controls
-- Sensitive data protection principles
-- Secure analytical consumption patterns
+* Agent Productivity Analysis
+* Revenue Concentration Monitoring
+* Top 10% Agent Dependency Metrics
 
+#### Marketing Intelligence
 
-# Key Business Outcomes
+* Regional Funnel Conversion
+* Trust Signal Analysis
+* Customer Acquisition Effectiveness
 
-The platform transforms insurance data from a reporting asset into a strategic decision engine.
+#### Underwriting Intelligence
 
+* Risk-Pricing Alignment
+* Portfolio Exposure Monitoring
+* Risk Category Analytics
 
-| Business Area | Intelligence Enabled |
-|---------------|---------------------|
-| Executive Strategy | Regional growth and risk visibility |
-| Finance | Premium quality and profitability analysis |
-| Sales | Agent productivity and conversion optimization |
-| Marketing | Lead funnel improvement and campaign effectiveness |
-| Underwriting | Risk intelligence and pricing insights |
-| Data Governance | Trusted and controlled analytics ecosystem |
+#### Executive Intelligence
 
+* Regional Growth Quality Index
+* Revenue Sustainability Metrics
+* Trust-Adjusted Performance Analysis
 
-# Technology Stack
+### Technology Stack
 
-| Layer | Technologies |
-|------|--------------|
-| Database Engineering | PostgreSQL |
-| Analytics Engineering | SQL, PL/pgSQL |
-| Data Modeling | Snowflake Schema Design |
-| Data Quality | Profiling, Validation Rules, Quality Scoring |
-| Data Governance | Data Classification, Secure Consumption Design |
-| Business Intelligence | Power BI |
-| Analytics | KPI Frameworks, Business Intelligence, Decision Analytics |
+* PostgreSQL
+* SQL
+* PL/pgSQL
+* Data Modeling
+* Data Governance
+* Data Quality Frameworks
+* Analytics Engineering
+* Power BI
+* KPI Design
+* Business Intelligence
 
+### Skills Demonstrated
 
-# Project Positioning
+#### Senior Data Analyst
 
-This project demonstrates capabilities across:
+* Executive KPI development
+* Business performance analysis
+* Revenue quality analytics
+* Customer and sales intelligence
+* Strategic recommendations
 
-- Business Analysis
-- Analytics Engineering
-- Business Intelligence Development
-- Data Governance
-- Data Quality Management
-- Enterprise Data Modeling
+#### Analytics Engineer
 
+* Data architecture design
+* Transformation frameworks
+* Semantic modeling
+* Data mart development
+* Reusable SQL engineering patterns
 
-## Role Perspective
+#### Data Governance Analyst
 
-Designed from the perspective of a:
+* Data classification
+* Privacy-preserving analytics
+* Tokenization architecture
+* Metric governance
+* Data quality and reconciliation frameworks
 
-**Business Analyst + Analytics Engineer + Data Governance Professional**
+#### Power BI Developer
 
-with focus on connecting:
+* Semantic layer design
+* Executive dashboard architecture
+* KPI frameworks
+* Drill-down analytics
+* Decision-support reporting
 
-**Data → Intelligence → Business Decisions → Measurable Outcomes**
+### Business Impact
+
+The platform demonstrates how organizations can move beyond traditional reporting and build governed, privacy-aware analytics systems that support executive decision-making, operational intelligence, and scalable business growth.
+
+**From Raw Insurance Data → Governed Intelligence → Strategic Decisions**
